@@ -46,9 +46,9 @@ app.post('/upload', async (req, res) => {
                 status: true,
                 message: 'File is uploaded',
                 data: {
-                    name: avatar.name,
-                    mimetype: avatar.mimetype,
-                    size: avatar.size
+                    name: data.name,
+                    mimetype: data.mimetype,
+                    size: data.size
                 }
             });
         }
@@ -94,3 +94,10 @@ app.post('/upload-photos', async (req, res) => {
         res.status(500).send(err);
     }
 });
+
+
+app.get('/download', function(req, res){
+    var fileName = req.query.fileName;
+    const file = `./uploads/${fileName}`;
+    res.download(file); // Set disposition and send it.
+  });
