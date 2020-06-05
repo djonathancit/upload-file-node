@@ -39,7 +39,7 @@ app.post('/upload', async (req, res) => {
             let data = req.files.data;
             
             console.log(1);
-            data.mv('./' + data.name);
+            data.mv('./uploads/' + data.name);
             console.log(2);
             //send response
             res.send({
@@ -73,7 +73,7 @@ app.post('/upload-photos', async (req, res) => {
                 let photo = req.files.photos[key];
                 
                 //move photo to uploads directory
-                photo.mv('./' + photo.name);
+                photo.mv('./uploads/' + photo.name);
 
                 //push file details
                 data.push({
@@ -100,7 +100,7 @@ app.get('/download', function(req, res){
     console.log(1);
     var fileName = req.query.fileName;
     console.log(2);
-    const file = `./${fileName}`;
+    const file = `./uploads/${fileName}`;
     console.log(3);
     res.download(file); // Set disposition and send it.
   });
