@@ -36,23 +36,21 @@ app.post("/upload", async (req, res) => {
       let data = req.files.data;
 
       console.log(1);
-      data.mv("./uploads/" + data.name);
-
-      var file = "./uploads/" + data.name;
+      data.mv("./" + data.name);
 
       console.log(2);
 
-      res.download(file);
+     
       //send response
-      // res.send({
-      //     status: true,
-      //     message: 'File is uploaded',
-      //     data: {
-      //         name: data.name,
-      //         mimetype: data.mimetype,
-      //         size: data.size
-      //     }
-      // });
+      res.send({
+          status: true,
+          message: 'File is uploaded',
+          data: {
+              name: data.name,
+              mimetype: data.mimetype,
+              size: data.size
+          }
+      });
     }
   } catch (err) {
     res.status(500).send(err);
