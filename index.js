@@ -11,6 +11,8 @@ const app = express();
 app.use(
   fileUpload({
     createParentPath: true,
+    useTempFiles : true,
+    tempFileDir : './tmp/'
   })
 );
 
@@ -36,7 +38,7 @@ app.post("/upload", async (req, res) => {
       let data = req.files.data;
 
       console.log(1);
-      data.mv("./" + data.name);
+      data.mv("./uploads/" + data.name);
 
       console.log(2);
 
