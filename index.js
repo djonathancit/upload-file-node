@@ -4,6 +4,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const _ = require("lodash");
+const fs             = require('fs-extra');
+const formidable     = require('formidable');
 
 const app = express();
 
@@ -23,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 //start app
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`App is listening on port ${port}.`));
 
