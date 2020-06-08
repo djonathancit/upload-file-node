@@ -4,8 +4,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const _ = require("lodash");
-const fs             = require('fs-extra');
-const formidable     = require('formidable');
+const { v4: uuidv4 } = require('uuid');
+
 
 const app = express();
 
@@ -40,7 +40,8 @@ app.post("/upload", async (req, res) => {
       let data = req.files.data;
 
       console.log(1);
-      data.mv("./uploads/" + data.name);
+      nameFile=`${uuidv4()}.jpeg`; 
+      data.mv("./uploads/" + nameFile);
 
       console.log(2);
       res.setHeader("Access-Control-Allow-Origin", "*");
