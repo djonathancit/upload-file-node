@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const _ = require("lodash");
 const { v4: uuidv4 } = require('uuid');
+const https = require('https');
+const fs = require('fs');
 
 
 const app = express();
@@ -27,7 +29,7 @@ app.use(morgan("dev"));
 //start app
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => console.log(`App is listening on port ${port}.`));
+//app.listen(port, () => console.log(`App is listening on port ${port}.`));
 
 app.post("/upload", async (req, res) => {
   try {
@@ -111,3 +113,20 @@ app.get("/download", function (req, res) {
   console.log(3);
   res.download(file); // Set disposition and send it.
 });
+
+
+
+if(process.env.ENVIROMENT){
+  app.listen(port, () => console.log(`App is listening on port ${port}.`));
+
+}else{
+  const key = fs.readFileSync("./key.pem");
+
+  const cert = fs.readFileSync("./cert.pem");
+
+  const server = https.createServer({ key: key, cert: cert }, app);
+  
+  server.listen(port, () => {
+      console.log(`server listening on ${port}`);
+  });
+}
