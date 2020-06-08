@@ -41,10 +41,14 @@ app.post("/upload", async (req, res) => {
       data.mv("./uploads/" + data.name);
 
       console.log(2);
-
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Access-Control-Allow-Methods", "*");
+      res.setHeader("ccess-Control-Max-Age", "7200");
+     
      
       //send response
-      res.send({
+      res.send(
+        {
           status: true,
           message: 'File is uploaded',
           data: {
