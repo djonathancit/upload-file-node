@@ -55,7 +55,7 @@ app.post("/upload", async (req, res) => {
           status: true,
           message: 'File is uploaded',
           data: {
-              name: data.name,
+              name: nameFile,
               mimetype: data.mimetype,
               size: data.size
           }
